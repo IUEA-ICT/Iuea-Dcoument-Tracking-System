@@ -1,61 +1,215 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+📝 Software Requirements Specification (SRS)
+Document Tracking System
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+1. Introduction
+1.1 Purpose
+The purpose of this SRS is to define the requirements for a Document Tracking System (DTS). The system will help organizations manage and track the movement, status, and ownership of documents within or across departments to ensure transparency, accountability, and efficiency.
+1.2 Scope
+The system will be a web-based application that allows users to:
+Upload and register documents
 
-## About Laravel
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Assign documents to staff or departments
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+Track document movement history
 
-## Learning Laravel
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+Set document status (e.g., pending, reviewed, approved)
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+Receive alerts/notifications about document actions or deadlines
 
-## Laravel Sponsors
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+View document reports and audit logs
 
-### Premium Partners
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development/)**
-- **[Active Logic](https://activelogic.com)**
+It will be built using modern web technologies (e.g., Laravel, Vue.js, MySQL or Firebase) and be deployed on an internal or cloud server.
+1.3 Intended Audience
+Project Manager
 
-## Contributing
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Development Team (Interns)
 
-## Code of Conduct
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+System Administrator
 
-## Security Vulnerabilities
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+End Users (Staff, Managers)
 
-## License
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+1.4 Definitions and Acronyms
+DTS: Document Tracking System
+
+
+CRUD: Create, Read, Update, Delete
+
+
+User: Any authenticated individual using the system
+
+
+Admin: A user with full access and configuration permissions
+
+
+
+2. Overall Description
+2.1 Product Perspective
+The DTS is a standalone web application designed to improve document handling within an organization. It will support role-based access and maintain audit trails for document movements.
+2.2 User Classes and Characteristics
+Administrator: Manages users, system settings, and reports
+
+
+Clerk/User: Uploads, edits, and tracks documents
+
+
+Reviewer/Manager: Reviews, comments, or approves documents
+
+
+2.3 Assumptions and Dependencies
+System will be hosted on Apache or Nginx server with PHP support
+
+
+Users have access to a browser and internet connection
+
+
+Email/SMS gateway is available for notifications (optional)
+
+
+
+3. Specific Requirements
+3.1 Functional Requirements
+3.1.1 User Management
+Users can register/login/logout
+
+
+Admin can create/edit/delete users
+
+
+Users have roles (Admin, Clerk, Reviewer)
+
+
+3.1.2 Document Lifecycle
+Upload document (PDF, DOCX, etc.)
+
+
+Assign to department or user
+
+
+Update status: Pending, Under Review, Approved, Rejected
+
+
+Add notes/comments
+
+
+View document history and movement
+
+
+3.1.3 Notifications
+Notify user on assignment or status change
+
+
+Reminders for pending documents
+
+
+3.1.4 Reporting
+Generate document status report
+
+
+View documents by user/department/status
+
+
+Export reports (CSV, PDF)
+
+
+3.1.5 Search and Filters
+Search by title, date, status, or department
+
+
+Filter documents by various parameters
+
+
+
+3.2 Non-Functional Requirements
+3.2.1 Performance
+The system should support at least 50 concurrent users
+
+
+3.2.2 Usability
+Intuitive, user-friendly UI
+
+
+Mobile responsive
+
+
+3.2.3 Security
+Role-based access control
+
+
+Passwords stored securely (hashed)
+
+
+HTTPS encryption required
+
+
+3.2.4 Reliability
+The system must be available 99% of the time during business hours
+
+
+3.2.5 Maintainability
+Use Laravel MVC structure for easy code maintenance
+
+
+
+4. External Interface Requirements
+4.1 User Interfaces
+Login Page
+
+
+Dashboard
+
+
+Document Upload Form
+
+
+Document List & Details View
+
+
+User Management
+
+
+Report Generation
+
+
+4.2 Hardware Interfaces
+Server with at least 1 vCPU, 2GB RAM
+
+
+Client: Any modern browser
+
+
+4.3 Software Interfaces
+Web Server (Apache or Nginx)
+
+
+Laravel (Backend Framework)
+
+
+Firebase or MySQL (Database)
+
+
+Optional: Email API (SendGrid/Mailgun) or SMS API
+
+
+
+5. Future Enhancements (Optional)
+Document versioning
+
+
+Integration with digital signature tools
+
+
+OCR (Optical Character Recognition) for scanned documents
+
+
+Mobile app
+

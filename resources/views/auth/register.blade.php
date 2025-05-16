@@ -3,12 +3,9 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>IUEA - Document Tracking System</title>
+    <title>Register - IUEA Document Tracking System</title>
     
-    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
     <script>
@@ -30,10 +27,8 @@
     </style>
 </head>
 <body class="bg-gradient-to-br from-gray-100 to-gray-200">
-    <!-- Add pb-16 to create space for fixed footer -->
     <div class="min-h-screen flex flex-col justify-center py-6 pb-16 sm:px-6 lg:px-8">
         <div class="sm:mx-auto sm:w-full sm:max-w-md">
-            <!-- IUEA Logo with background -->
             <div class="bg-white p-4 rounded-full shadow-lg w-32 h-32 mx-auto mb-6">
                 <img class="w-full h-full object-contain" 
                      src="//172.16.17.10/port/img/Logosq.png" 
@@ -41,73 +36,66 @@
             </div>
             
             <h2 class="text-center text-3xl font-extrabold text-gray-900 tracking-tight">
-                Document Tracking System
+                Create New Account
             </h2>
             <p class="mt-2 text-center text-sm text-gray-600">
-                Secure Access Portal
+                IUEA Document Tracking System
             </p>
         </div>
 
         <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
             <div class="bg-white py-8 px-4 shadow-2xl rounded-lg sm:px-10 border-t-4 border-iuea-maroon">
                 <form class="space-y-6" action="#" method="POST">
+                    <!-- Name Input -->
+                    <div>
+                        <label for="name" class="block text-sm font-medium text-gray-700">Full Name</label>
+                        <input type="text" name="name" id="name" required 
+                            class="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400
+                            focus:outline-none focus:ring-2 focus:ring-iuea-maroon focus:border-iuea-maroon">
+                    </div>
+
                     <!-- Email Input -->
                     <div>
-                        <label for="email" class="block text-sm font-medium text-gray-700">
-                            Email
-                        </label>
-                        <div class="mt-1 relative">
-                            <input id="email" name="email" type="email" required 
-                                placeholder="username@iuea.ac.ug"
-                                class="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400
-                                focus:outline-none focus:ring-2 focus:ring-iuea-maroon focus:border-iuea-maroon">
-                        </div>
+                        <label for="email" class="block text-sm font-medium text-gray-700">University Email</label>
+                        <input type="email" name="email" id="email" required 
+                            placeholder="username@iuea.ac.ug"
+                            class="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400
+                            focus:outline-none focus:ring-2 focus:ring-iuea-maroon focus:border-iuea-maroon">
                     </div>
 
                     <!-- Password Input -->
                     <div>
-                        <label for="password" class="block text-sm font-medium text-gray-700">
-                            Password
+                        <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
+                        <input type="password" name="password" id="password" required 
+                            class="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400
+                            focus:outline-none focus:ring-2 focus:ring-iuea-maroon focus:border-iuea-maroon">
+                    </div>
+
+                    <!-- Confirm Password -->
+                    <div>
+                        <label for="password_confirmation" class="block text-sm font-medium text-gray-700">
+                            Confirm Password
                         </label>
-                        <div class="mt-1 relative">
-                            <input id="password" name="password" type="password" required
-                                class="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400
-                                focus:outline-none focus:ring-2 focus:ring-iuea-maroon focus:border-iuea-maroon">
-                        </div>
+                        <input type="password" name="password_confirmation" id="password_confirmation" required 
+                            class="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400
+                            focus:outline-none focus:ring-2 focus:ring-iuea-maroon focus:border-iuea-maroon">
                     </div>
 
-                    <!-- Remember Me & Forgot Password -->
-                    <div class="flex items-center justify-between">
-                        <div class="flex items-center">
-                            <input id="remember-me" name="remember-me" type="checkbox" 
-                                class="h-4 w-4 rounded border-gray-300 text-iuea-maroon focus:ring-iuea-maroon">
-                            <label for="remember-me" class="ml-2 block text-sm text-gray-700">
-                                Remember me
-                            </label>
-                        </div>
-
-                        <div class="text-sm">
-                            <a href="/forgot-password" class="font-medium text-iuea-maroon hover:text-opacity-80">
-                                Forgot password?
-                            </a>
-                        </div>
-                    </div>
-
-                    <!-- Sign In Button -->
+                    <!-- Register Button -->
                     <div>
                         <button type="submit" 
                             class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-iuea-maroon hover:bg-opacity-90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-iuea-maroon transition-all duration-200">
-                            Sign in to your account
+                            Create Account
                         </button>
                     </div>
                 </form>
 
-                <!-- Footer -->
+                <!-- Login Link -->
                 <div class="mt-6 text-center text-sm">
                     <p class="text-gray-600">
-                        Don't have an account? 
-                        <a href="/register" class="font-medium text-iuea-maroon hover:text-opacity-80 underline">
-                            Create Account
+                        Already have an account? 
+                        <a href="/login" class="font-medium text-iuea-maroon hover:text-opacity-80 underline">
+                            Sign in
                         </a>
                     </p>
                 </div>
@@ -115,7 +103,6 @@
         </div>
     </div>
 
-    <!-- Updated footer banner with z-index and better positioning -->
     <div class="bg-iuea-maroon text-white py-3 text-center text-sm fixed bottom-0 left-0 right-0 w-full z-50 shadow-lg">
         © 2025 International University of East Africa. All rights reserved
     </div>
