@@ -27,23 +27,25 @@
     </style>
 </head>
 <body class="bg-gradient-to-br from-gray-100 to-gray-200">
-    <div class="min-h-screen flex flex-col justify-center py-6 pb-16 sm:px-6 lg:px-8">
-        <div class="sm:mx-auto sm:w-full sm:max-w-md">
-            <!-- IUEA Logo -->
-            <div class="bg-white p-4 rounded-full shadow-lg w-32 h-32 mx-auto mb-6">
+    <div class="min-h-screen flex flex-col justify-center py-4 sm:py-6 px-4 sm:px-6 lg:px-8">
+        <div class="w-full max-w-[90%] sm:max-w-md mx-auto">
+            <!-- IUEA Logo with background -->
+            <div class="bg-white p-3 sm:p-4 rounded-full shadow-lg w-24 h-24 sm:w-32 sm:h-32 mx-auto mb-4 sm:mb-6">
                 <img class="w-full h-full object-contain" 
                      src="//172.16.17.10/port/img/Logosq.png" 
                      alt="IUEA Logo">
             </div>
             
-            <h2 class="text-center text-3xl font-extrabold text-gray-900">Reset Password</h2>
-            <p class="mt-2 text-center text-sm text-gray-600">
+            <h2 class="text-center text-2xl sm:text-3xl font-extrabold text-gray-900">
+                Reset Password
+            </h2>
+            <p class="mt-2 text-center text-xs sm:text-sm text-gray-600">
                 Enter your email address and we'll send you a link to reset your password
             </p>
         </div>
 
-        <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
-            <div class="bg-white py-8 px-4 shadow-2xl rounded-lg sm:px-10 border-t-4 border-iuea-maroon">
+        <div class="mt-6 sm:mt-8 w-full max-w-[90%] sm:max-w-md mx-auto">
+            <div class="bg-white py-6 sm:py-8 px-4 sm:px-10 shadow-2xl rounded-lg border-t-4 border-iuea-maroon">
                 <form class="space-y-6" action="#" method="POST">
                     <div>
                         <label for="email" class="block text-sm font-medium text-gray-700">
@@ -72,10 +74,6 @@
                 </div>
             </div>
         </div>
-    </div>
-
-    <div class="bg-iuea-maroon text-white py-3 text-center text-sm fixed bottom-0 left-0 right-0 w-full z-50 shadow-lg">
-        © 2025 International University of East Africa. All rights reserved
     </div>
 </body>
 </html>
