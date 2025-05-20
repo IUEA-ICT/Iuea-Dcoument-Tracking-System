@@ -288,6 +288,72 @@
                 font-size: 0.9rem;
             }
         }
+        .feature-icon-card {
+            position: relative;
+            width: 70px;
+            height: 70px;
+            cursor: pointer;
+            perspective: 700px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .feature-icon-card img {
+            width: 60px;
+            height: 60px;
+            border-radius: 16px;
+            box-shadow: 0 2px 12px #0002;
+            transition: transform 0.5s cubic-bezier(.4,2,.6,1);
+            background: #fff;
+            z-index: 2;
+        }
+        .feature-info {
+            position: absolute;
+            top: 0; left: 0;
+            width: 260px;
+            min-height: 70px;
+            background: #fff;
+            color: #800000;
+            border-radius: 16px;
+            box-shadow: 0 4px 24px #0003;
+            padding: 1.2rem 1rem 1rem 1rem;
+            opacity: 0;
+            pointer-events: none;
+            transform: rotateY(90deg) scale(0.8);
+            transition: opacity 0.4s, transform 0.5s cubic-bezier(.4,2,.6,1);
+            z-index: 3;
+            text-align: left;
+        }
+        .feature-info h3 {
+            margin: 0 0 0.5rem 0;
+            font-size: 1.1rem;
+            color: #800000;
+        }
+        .feature-info p {
+            margin: 0;
+            font-size: 0.97rem;
+            color: #333;
+        }
+        .feature-icon-card:hover img {
+            transform: rotateY(-90deg) scale(0.8);
+        }
+        .feature-icon-card:hover .feature-info {
+            opacity: 1;
+            pointer-events: auto;
+            transform: rotateY(0deg) scale(1);
+        }
+        .feature-rotate:hover {
+            background: #800000 !important;
+            color: #fff !important;
+            transform: rotateY(360deg) scale(1.04);
+            box-shadow: 0 8px 32px 0 rgba(128,0,0,0.18);
+            transition: box-shadow 0.35s cubic-bezier(.4,2,.6,1), transform 0.4s cubic-bezier(.4,2,.6,1), background 0.4s;
+        }
+        .feature-rotate:hover h3,
+        .feature-rotate:hover p {
+            color: #fff !important;
+            transition: color 0.3s;
+        }
     </style>
 </head>
 <body>
@@ -364,38 +430,38 @@
                             The Documentation Tracking System is built to address the challenges of document management in modern organizations. It supports role-based access for administrators, clerks, and reviewers, and maintains a complete audit trail for every document. DTS is scalable, secure, and integrates with email/SMS gateways for notifications. Whether you are a project manager, system administrator, or end user, DTS streamlines your workflow and enhances productivity.
                         </p>
                         <p>
-                            <a href="#features" style="color:var(--primary);font-weight:bold;text-decoration:underline;">Explore Features &rarr;</a>
+                            <a href="#features" style="color:#fff;background:var(--primary);padding:0.9rem 2.2rem;border-radius:6px;font-weight:bold;text-decoration:none;display:inline-block;font-size:1.1rem;">Explore Features &rarr;</a>
                         </p>
                     </div>
                 </div>
             </div>
         </section>
-        <section id="features" class="features" style="position:relative;overflow:hidden;width:100vw;max-width:none;margin:2.5rem 0 2rem 0;border-radius:1.2rem;box-shadow:0 2px 16px #0001;background:#6a6a6a;padding:1.5rem 0 1.5rem 0;">
-            <div style="font-size:2.1rem;color:var(--primary);font-weight:700;margin-bottom:1rem;text-align:center;">Features</div>
-            <div style="display:flex;flex-wrap:wrap;gap:1.2rem;justify-content:center;">
-                <div class="feature-card" id="feature-card-centralized-storage" style="max-width:260px;min-width:180px;padding:1.2rem 0.7rem;">
-                    <img src="https://servermall.com/upload/medialibrary/8a1/pf7lz19wfcssds6egc09015oaklc06xl/server-virtualization-4.jpg" alt="Centralized Storage" style="margin-bottom:0.7rem;width:38px;height:38px;">
-                    <h3 style="font-size:1.05rem;margin-bottom:0.5rem;">Centralized Storage</h3>
-                    <p style="font-size:0.97rem;">
-                        All your documents are stored in one secure, organized platform. This ensures easy management, prevents loss, and allows authorized users to access documents from anywhere at any time. Centralized storage also supports backup and audit trails for compliance and security.
-                    </p>
-                </div>
-                <div class="feature-card" id="feature-card-real-time-tracking" style="max-width:260px;min-width:180px;padding:1.2rem 0.7rem;">
-                    <img src="https://spng.pngfind.com/pngs/s/437-4378486_flowcontrol-real-time-monitoring-icon-in-circle-hd.png" alt="Real-time Tracking" style="margin-bottom:0.7rem;width:38px;height:38px;">
-                    <h3 style="font-size:1.05rem;margin-bottom:0.5rem;">Real-time Tracking</h3>
-                    <p style="font-size:0.97rem;">
-                        Instantly monitor the status and movement of every document. Real-time tracking provides up-to-date information on who accessed or modified a document, its current location or owner, and its status (pending, under review, approved, etc.), ensuring transparency and accountability.
-                    </p>
-                </div>
-                <div class="feature-card" id="feature-card-easy-access" style="max-width:260px;min-width:180px;padding:1.2rem 0.7rem;">
-                    <img src="https://www.pngkey.com/png/detail/272-2721681_the-new-soluscope-sprint-is-faster-than-ever.png" alt="Easy Access" style="margin-bottom:0.7rem;width:38px;height:38px;">
-                    <h3 style="font-size:1.05rem;margin-bottom:0.5rem;">Easy Access</h3>
-                    <p style="font-size:0.97rem;">
-                        Retrieve and share documents with just a few clicks. The system is designed for intuitive navigation and powerful search, allowing users to quickly find, download, or share documents based on title, date, status, or department, improving productivity and collaboration.
-                    </p>
-                </div>
-            </div>
-        </section>
+        <section id="features" class="features" style="position:relative;overflow:hidden;width:100vw;max-width:none;margin:2.5rem 0 2rem 0;border-radius:1.2rem;box-shadow:0 2px 16px #0001;background:#800000 url('https://static.vecteezy.com/system/resources/thumbnails/000/358/468/small/White_Background-01.jpg') center center / cover no-repeat;padding:2.5rem 0 2.5rem 0;">
+    <div style="font-size:2.1rem;color:var(--primary);font-weight:700;margin-bottom:2.2rem;text-align:center;">Features</div>
+    <div style="display:flex;justify-content:center;gap:2.5rem;flex-wrap:wrap;">
+        <div class="feature-card feature-rotate" style="background:#fff;border-radius:18px;box-shadow:0 2px 12px rgba(0,0,0,0.06);padding:2.2rem 1.5rem;max-width:340px;min-width:220px;display:flex;flex-direction:column;align-items:center;transition:box-shadow 0.25s,transform 0.4s,background 0.4s;">
+            <img src="https://servermall.com/upload/medialibrary/8a1/pf7lz19wfcssds6egc09015oaklc06xl/server-virtualization-4.jpg" alt="Centralized Storage" style="width:60px;height:60px;border-radius:16px;box-shadow:0 2px 12px #0002;margin-bottom:1.2rem;">
+            <h3 style="color:var(--primary);margin-bottom:0.7rem;font-size:1.15rem;">Centralized Storage</h3>
+            <p style="color:#333;font-size:1rem;line-height:1.6;text-align:center;">
+                All your documents are stored in one secure, organized platform. This ensures easy management, prevents loss, and allows authorized users to access documents from anywhere at any time. Centralized storage also supports backup and audit trails for compliance and security.
+            </p>
+        </div>
+        <div class="feature-card feature-rotate" style="background:#fff;border-radius:18px;box-shadow:0 2px 12px rgba(0,0,0,0.06);padding:2.2rem 1.5rem;max-width:340px;min-width:220px;display:flex;flex-direction:column;align-items:center;transition:box-shadow 0.25s,transform 0.4s,background 0.4s;">
+            <img src="https://spng.pngfind.com/pngs/s/437-4378486_flowcontrol-real-time-monitoring-icon-in-circle-hd.png" alt="Real-time Tracking" style="width:60px;height:60px;border-radius:16px;box-shadow:0 2px 12px #0002;margin-bottom:1.2rem;">
+            <h3 style="color:var(--primary);margin-bottom:0.7rem;font-size:1.15rem;">Real-time Tracking</h3>
+            <p style="color:#333;font-size:1rem;line-height:1.6;text-align:center;">
+                Instantly monitor the status and movement of every document. Real-time tracking provides up-to-date information on who accessed or modified a document, its current location or owner, and its status (pending, under review, approved, etc.), ensuring transparency and accountability.
+            </p>
+        </div>
+        <div class="feature-card feature-rotate" style="background:#fff;border-radius:18px;box-shadow:0 2px 12px rgba(0,0,0,0.06);padding:2.2rem 1.5rem;max-width:340px;min-width:220px;display:flex;flex-direction:column;align-items:center;transition:box-shadow 0.25s,transform 0.4s,background 0.4s;">
+            <img src="https://www.pngkey.com/png/detail/272-2721681_the-new-soluscope-sprint-is-faster-than-ever.png" alt="Easy Access" style="width:60px;height:60px;border-radius:16px;box-shadow:0 2px 12px #0002;margin-bottom:1.2rem;">
+            <h3 style="color:var(--primary);margin-bottom:0.7rem;font-size:1.15rem;">Easy Access</h3>
+            <p style="color:#333;font-size:1rem;line-height:1.6;text-align:center;">
+                Retrieve and share documents with just a few clicks. The system is designed for intuitive navigation and powerful search, allowing users to quickly find, download, or share documents based on title, date, status, or department, improving productivity and collaboration.
+            </p>
+        </div>
+    </div>
+</section>
         <section id="contact" style="width:100vw;max-width:none;margin:0;padding:0;border-radius:0;box-shadow:none;background:none;position:relative;overflow:hidden;">
             <div style="position:relative;min-height:420px;width:100vw;display:flex;align-items:center;gap:2.5rem;justify-content:center;">
                 <!-- Blurred and darkened background image for contact section -->
@@ -414,7 +480,9 @@
                     <div style="flex:2 1 400px;min-width:260px;">
                         <h2 style="color:var(--primary);margin-bottom:1rem;font-size:2.1rem;">Contact</h2>
                         <p style="font-size:1.15rem;line-height:1.7;color:#fff;text-shadow:0 2px 8px #0008;">
-                            Need help or have questions? Reach out to our support team for assistance with your account, document management, or technical issues. You can contact us via email, phone, or the contact form below. We are committed to providing prompt and helpful support to all users.
+                            Need help or have questions? Reach out to our support team for assistance with your account,
+                         document management, or technical issues. You can contact us via email, phone, or the contact form below.
+                          We are committed to providing prompt and helpful support to all users.
                         </p>
                         <form style="margin-top:1.5rem;">
                             <input type="text" placeholder="Your Name" required style="width:100%;padding:0.7rem;margin-bottom:1rem;border-radius:6px;border:1px solid #ccc;">
@@ -423,7 +491,7 @@
                             <button type="submit" style="background:var(--primary);color:#fff;padding:0.7rem 2rem;border:none;border-radius:6px;font-size:1rem;cursor:pointer;">Send Message</button>
                         </form>
                         <p style="margin-top:1.5rem;">
-                            <a href="#login" style="color:var(--primary);font-weight:bold;text-decoration:underline;">Go to Login &rarr;</a>
+                            <a href="#login" style="color:#fff;background:var(--primary);padding:0.7rem 2.2rem;border-radius:6px;font-weight:bold;text-decoration:none;display:inline-block;font-size:1.1rem;">Go to Login &rarr;</a>
                         </p>
                     </div>
                 </div>
