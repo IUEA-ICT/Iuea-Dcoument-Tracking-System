@@ -12,9 +12,8 @@ Route::get('/login', function () {
 })->name('login');
 
 Route::post('/login', function () {
-    // Handle login form submission
     return redirect('/dashboard');
-})->name('login.submit');
+})->name('login.post');
 
 // Register Route
 Route::get('/register', function () {
@@ -25,5 +24,10 @@ Route::get('/register', function () {
 Route::get('/forgot-password', function () {
     return view('auth.forgot-password');
 })->name('password.request');
+
+// Dashboard Route
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->name('dashboard');
 
 

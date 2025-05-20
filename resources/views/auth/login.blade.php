@@ -34,9 +34,11 @@
         <div class="w-full max-w-[90%] sm:max-w-md mx-auto">
             <!-- IUEA Logo with background -->
             <div class="bg-white p-3 sm:p-4 rounded-full shadow-lg w-24 h-24 sm:w-32 sm:h-32 mx-auto mb-4 sm:mb-6">
-                <img class="w-full h-full object-contain" 
-                     src="//172.16.17.10/port/img/Logosq.png" 
-                     alt="IUEA Logo">
+                <a href="/" class="block hover:opacity-80 transition-opacity">
+                    <img class="w-full h-full object-contain" 
+                         src="//172.16.17.10/port/img/Logosq.png" 
+                         alt="IUEA Logo">
+                </a>
             </div>
             
             <h2 class="text-center text-2xl sm:text-3xl font-extrabold text-gray-900 tracking-tight">
@@ -49,7 +51,8 @@
 
         <div class="mt-6 sm:mt-8 w-full max-w-[90%] sm:max-w-md mx-auto">
             <div class="bg-white py-6 sm:py-8 px-4 sm:px-10 shadow-2xl rounded-lg border-t-4 border-iuea-maroon">
-                <form class="space-y-4 sm:space-y-6" action="#" method="POST">
+                <form class="space-y-4 sm:space-y-6" action="{{ route('login.post') }}" method="POST">
+                    @csrf
                     <!-- Email Input -->
                     <div>
                         <label for="email" class="block text-sm font-medium text-gray-700">
