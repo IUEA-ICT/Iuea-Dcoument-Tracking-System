@@ -2,32 +2,51 @@
 
 use Illuminate\Support\Facades\Route;
 
+// Public Routes
 Route::get('/', function () {
     return view('welcome');
 });
 
-// Login Routes
+// Authentication Routes
 Route::get('/login', function () {
     return view('auth.login');
 })->name('login');
 
-Route::post('/login', function () {
-    return redirect('/dashboard');
-})->name('login.post');
-
-// Register Route
 Route::get('/register', function () {
     return view('auth.register');
 })->name('register');
 
-// Forgot Password Route
 Route::get('/forgot-password', function () {
     return view('auth.forgot-password');
 })->name('password.request');
 
-// Dashboard Route
+// Auth Routes
+Route::post('/login-submit', function () {
+    return redirect('/dashboard');
+})->name('login.post');
+
+// Dashboard
 Route::get('/dashboard', function () {
     return view('dashboard');
-})->name('dashboard');
+});
+
+// Documents
+Route::get('/documents', function () {
+    return view('documents.index');
+});
+
+Route::get('/documents/pending', function () {
+    return view('documents.pending');
+});
+
+// Users
+Route::get('/users', function () {
+    return view('users.index');
+});
+
+// Reports
+Route::get('/reports', function () {
+    return view('reports.index');
+});
 
 

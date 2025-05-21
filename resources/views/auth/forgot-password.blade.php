@@ -68,7 +68,7 @@
                 </form>
 
                 <div class="mt-6 text-center text-sm">
-                    <a href="/login" class="font-medium text-iuea-maroon hover:text-opacity-80">
+                    <a href="{{ route('login') }}" class="font-medium text-iuea-maroon hover:text-opacity-80">
                         Back to login
                     </a>
                 </div>

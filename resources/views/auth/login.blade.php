@@ -51,7 +51,7 @@
 
         <div class="mt-6 sm:mt-8 w-full max-w-[90%] sm:max-w-md mx-auto">
             <div class="bg-white py-6 sm:py-8 px-4 sm:px-10 shadow-2xl rounded-lg border-t-4 border-iuea-maroon">
-                <form class="space-y-4 sm:space-y-6" action="{{ route('login.post') }}" method="POST">
+                <form class="space-y-4 sm:space-y-6" action="{{ url('/login-submit') }}" method="POST">
                     @csrf
                     <!-- Email Input -->
                     <div>
@@ -89,7 +89,7 @@
                         </div>
 
                         <div class="text-sm">
-                            <a href="/forgot-password" class="font-medium text-iuea-maroon hover:text-opacity-80">
+                            <a href="{{ route('password.request') }}" class="font-medium text-iuea-maroon hover:text-opacity-80">
                                 Forgot password?
                             </a>
                         </div>
@@ -108,7 +108,7 @@
                 <div class="mt-4 sm:mt-6 text-center text-xs sm:text-sm">
                     <p class="text-gray-600">
                         Don't have an account? 
-                        <a href="/register" class="font-medium text-iuea-maroon hover:text-opacity-80 underline">
+                        <a href="{{ route('register') }}" class="font-medium text-iuea-maroon hover:text-opacity-80 underline">
                             Create Account
                         </a>
                     </p>

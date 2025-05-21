@@ -95,7 +95,7 @@
                 <div class="mt-6 text-center text-sm">
                     <p class="text-gray-600">
                         Already have an account? 
-                        <a href="/login" class="font-medium text-iuea-maroon hover:text-opacity-80 underline">
+                        <a href="{{ route('login') }}" class="font-medium text-iuea-maroon hover:text-opacity-80 underline">
                             Sign in
                         </a>
                     </p>

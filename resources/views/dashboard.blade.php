@@ -44,8 +44,7 @@
         <nav class="mt-8 px-4">
             <!-- Main Navigation -->
             <div class="space-y-4">
-                <!-- Active link has bg-white/10 class -->
-                <a href="#" class="flex items-center px-4 py-3 text-sm rounded-lg bg-white/10 transition-colors">
+                <a href="/dashboard" class="flex items-center px-4 py-3 text-sm rounded-lg bg-white/10 transition-colors">
                     <i class="fas fa-home w-5 h-5"></i>
                     <span class="ml-3 font-medium">Dashboard</span>
                 </a>
@@ -54,12 +53,12 @@
                     <h3 class="text-xs uppercase tracking-wider text-white/50">Documents</h3>
                 </div>
 
-                <a href="#" class="flex items-center px-4 py-3 text-sm rounded-lg hover:bg-white/5 transition-colors group">
+                <a href="/documents" class="flex items-center px-4 py-3 text-sm rounded-lg hover:bg-white/5 transition-colors group">
                     <i class="fas fa-file w-5 h-5 opacity-75 group-hover:opacity-100"></i>
                     <span class="ml-3">All Documents</span>
                 </a>
 
-                <a href="#" class="flex items-center px-4 py-3 text-sm rounded-lg hover:bg-white/5 transition-colors group">
+                <a href="/documents/pending" class="flex items-center px-4 py-3 text-sm rounded-lg hover:bg-white/5 transition-colors group">
                     <i class="fas fa-clock w-5 h-5 opacity-75 group-hover:opacity-100"></i>
                     <span class="ml-3">Pending</span>
                     <span class="ml-auto bg-white/20 px-2 py-0.5 rounded-full text-xs">28</span>
@@ -69,12 +68,12 @@
                     <h3 class="text-xs uppercase tracking-wider text-white/50">Management</h3>
                 </div>
 
-                <a href="#" class="flex items-center px-4 py-3 text-sm rounded-lg hover:bg-white/5 transition-colors group">
+                <a href="/users" class="flex items-center px-4 py-3 text-sm rounded-lg hover:bg-white/5 transition-colors group">
                     <i class="fas fa-users w-5 h-5 opacity-75 group-hover:opacity-100"></i>
                     <span class="ml-3">Users</span>
                 </a>
 
-                <a href="#" class="flex items-center px-4 py-3 text-sm rounded-lg hover:bg-white/5 transition-colors group">
+                <a href="/reports" class="flex items-center px-4 py-3 text-sm rounded-lg hover:bg-white/5 transition-colors group">
                     <i class="fas fa-chart-bar w-5 h-5 opacity-75 group-hover:opacity-100"></i>
                     <span class="ml-3">Reports</span>
                 </a>
