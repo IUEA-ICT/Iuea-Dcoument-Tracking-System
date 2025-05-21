@@ -710,10 +710,10 @@
         }, 2500);
     })();
 
-    // Login section background color slider (smooth transition, wide section)
+    // Login section background color slider (smooth transition, two colors)
     (function() {
         const loginSection = document.getElementById('login');
-        const colors = ["#a9a9a9", "#949494", "#7f7f7f", "#545454"];
+        const colors = ["#858585", "#9f9f9f"];
         let idx = 0;
         if (loginSection) {
             loginSection.style.transition = "background 1.2s";
