@@ -82,11 +82,11 @@
             <!-- Bottom Section -->
             <div class="absolute bottom-0 left-0 right-0 p-4">
                 <hr class="border-white/10 mb-4">
-                <a href="/login" class="flex items-center px-4 py-3 text-sm rounded-lg hover:bg-white/5 transition-colors group text-red-300 hover:text-red-200">
+                <a href="{{ route('logout') }}" class="flex items-center px-4 py-3 text-sm rounded-lg hover:bg-white/5 transition-colors group text-red-300 hover:text-red-200">
                     <i class="fas fa-sign-out-alt w-5 h-5 opacity-75 group-hover:opacity-100"></i>
                     <span class="ml-3">Logout</span>
                 </a>
-                <a href="#" class="flex items-center px-4 py-3 text-sm rounded-lg hover:bg-white/5 transition-colors group">
+                <a href="{{ route('settings') }}" class="flex items-center px-4 py-3 text-sm rounded-lg hover:bg-white/5 transition-colors group">
                     <i class="fas fa-cog w-5 h-5 opacity-75 group-hover:opacity-100"></i>
                     <span class="ml-3">Settings</span>
                 </a>

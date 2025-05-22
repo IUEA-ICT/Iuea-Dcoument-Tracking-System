@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\SettingsController;
 
 // Public Routes
 Route::get('/', function () {
@@ -19,6 +20,12 @@ Route::get('/register', function () {
 Route::get('/forgot-password', function () {
     return view('auth.forgot-password');
 })->name('password.request');
+
+Route::get('/logout', function () {
+    Auth::logout();
+    Session::flush();
+    return redirect('/login');
+})->name('logout');
 
 // Auth Routes
 Route::post('/login-submit', function () {
@@ -48,5 +55,14 @@ Route::get('/users', function () {
 Route::get('/reports', function () {
     return view('reports.index');
 });
+
+// Settings Routes
+Route::get('/settings', function () {
+    return view('settings.index');
+})->name('settings');
+
+Route::post('/settings/profile', [SettingsController::class, 'updateProfile'])->name('settings.profile.update');
+Route::post('/settings/password', [SettingsController::class, 'updatePassword'])->name('settings.password.update');
+Route::post('/settings/notifications', [SettingsController::class, 'updateNotifications'])->name('settings.notifications.update');
 
 

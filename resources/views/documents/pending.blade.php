@@ -63,7 +63,7 @@
                 <option>Medium</option>
                 <option>Low</option>
             </select>
-            <button class="bg-iuea-maroon text-white px-4 py-2 rounded-lg hover:bg-opacity-90">
+            <button onclick="openPendingFilters()" class="bg-iuea-maroon text-white px-4 py-2 rounded-lg hover:bg-opacity-90">
                 <i class="fas fa-filter mr-2"></i> Apply Filters
             </button>
         </div>
@@ -130,5 +130,155 @@
 
         <!-- Add more document cards here -->
     </div>
+
+    <!-- Pending Filters Modal -->
+    <div id="pendingFiltersModal" class="fixed inset-0 bg-black/50 backdrop-blur-sm hidden items-center justify-center z-50">
+        <div class="bg-white rounded-xl shadow-2xl w-full max-w-lg p-6">
+            <div class="flex justify-between items-center mb-6">
+                <div>
+                    <h3 class="text-lg font-semibold text-gray-900">Filter Pending Documents</h3>
+                    <p class="text-sm text-gray-500">Customize your pending documents view</p>
+                </div>
+                <button onclick="closePendingFilters()" class="text-gray-400 hover:text-gray-500">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+
+            <form class="space-y-6">
+                <!-- Priority Level -->
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Priority Level</label>
+                    <div class="grid grid-cols-3 gap-3">
+                        <label class="relative flex">
+                            <input type="checkbox" class="peer sr-only" name="priority[]" value="high">
+                            <div class="w-full p-3 text-sm text-gray-600 bg-white border rounded-lg cursor-pointer peer-checked:border-red-500 peer-checked:bg-red-50 peer-checked:text-red-600 hover:bg-gray-50">
+                                <i class="fas fa-exclamation-circle mr-2"></i>High
+                            </div>
+                        </label>
+                        <label class="relative flex">
+                            <input type="checkbox" class="peer sr-only" name="priority[]" value="medium">
+                            <div class="w-full p-3 text-sm text-gray-600 bg-white border rounded-lg cursor-pointer peer-checked:border-yellow-500 peer-checked:bg-yellow-50 peer-checked:text-yellow-600 hover:bg-gray-50">
+                                <i class="fas fa-arrow-circle-up mr-2"></i>Medium
+                            </div>
+                        </label>
+                        <label class="relative flex">
+                            <input type="checkbox" class="peer sr-only" name="priority[]" value="low">
+                            <div class="w-full p-3 text-sm text-gray-600 bg-white border rounded-lg cursor-pointer peer-checked:border-blue-500 peer-checked:bg-blue-50 peer-checked:text-blue-600 hover:bg-gray-50">
+                                <i class="fas fa-arrow-circle-down mr-2"></i>Low
+                            </div>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Waiting Time -->
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Waiting Time</label>
+                    <div class="grid grid-cols-2 gap-3">
+                        <label class="relative flex">
+                            <input type="radio" class="peer sr-only" name="waiting_time" value="longest">
+                            <div class="w-full p-3 text-sm text-gray-600 bg-white border rounded-lg cursor-pointer peer-checked:border-iuea-maroon peer-checked:bg-iuea-maroon/5 peer-checked:text-iuea-maroon hover:bg-gray-50">
+                                Longest Wait
+                            </div>
+                        </label>
+                        <label class="relative flex">
+                            <input type="radio" class="peer sr-only" name="waiting_time" value="recent">
+                            <div class="w-full p-3 text-sm text-gray-600 bg-white border rounded-lg cursor-pointer peer-checked:border-iuea-maroon peer-checked:bg-iuea-maroon/5 peer-checked:text-iuea-maroon hover:bg-gray-50">
+                                Recently Added
+                            </div>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Review Stage -->
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Review Stage</label>
+                    <div class="space-y-2">
+                        <label class="relative flex items-start">
+                            <input type="checkbox" class="mt-0.5 text-iuea-maroon rounded border-gray-300 focus:ring-iuea-maroon">
+                            <span class="ml-2 text-sm text-gray-600">Initial Review <span class="text-xs text-gray-400">(waiting for first review)</span></span>
+                        </label>
+                        <label class="relative flex items-start">
+                            <input type="checkbox" class="mt-0.5 text-iuea-maroon rounded border-gray-300 focus:ring-iuea-maroon">
+                            <span class="ml-2 text-sm text-gray-600">In Progress <span class="text-xs text-gray-400">(partially reviewed)</span></span>
+                        </label>
+                        <label class="relative flex items-start">
+                            <input type="checkbox" class="mt-0.5 text-iuea-maroon rounded border-gray-300 focus:ring-iuea-maroon">
+                            <span class="ml-2 text-sm text-gray-600">Final Stage <span class="text-xs text-gray-400">(awaiting final approval)</span></span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="pt-4 border-t flex justify-between items-center">
+                    <button type="button" onclick="clearPendingFilters()" class="text-sm text-gray-500 hover:text-gray-700">
+                        <i class="fas fa-undo mr-1"></i> Reset Filters
+                    </button>
+                    <div class="space-x-3">
+                        <button type="button" onclick="closePendingFilters()" class="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50">
+                            Cancel
+                        </button>
+                        <button type="button" onclick="applyPendingFilters()" class="px-4 py-2 text-sm font-medium text-white bg-iuea-maroon rounded-lg hover:bg-opacity-90">
+                            Apply Filters
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function openPendingFilters() {
+            document.getElementById('pendingFiltersModal').classList.remove('hidden');
+            document.getElementById('pendingFiltersModal').classList.add('flex');
+        }
+
+        function closePendingFilters() {
+            document.getElementById('pendingFiltersModal').classList.add('hidden');
+            document.getElementById('pendingFiltersModal').classList.remove('flex');
+        }
+
+        function clearPendingFilters() {
+            const form = document.querySelector('#pendingFiltersModal form');
+            form.reset();
+        }
+
+        function applyPendingFilters() {
+            // Get all selected filters
+            const filters = {
+                priority: Array.from(document.querySelectorAll('input[name="priority[]"]:checked')).map(cb => cb.value),
+                waitingTime: document.querySelector('input[name="waiting_time"]:checked')?.value,
+                reviewStage: Array.from(document.querySelectorAll('input[type="checkbox"]:checked')).map(cb => cb.nextElementSibling.textContent.split('(')[0].trim())
+            };
+
+            // Here you would implement the actual filtering logic
+            console.log('Applied filters:', filters);
+            
+            // Close modal
+            closePendingFilters();
+
+            // Show success notification
+            showFilterNotification('Filters applied successfully');
+        }
+
+        function showFilterNotification(message) {
+            const notification = document.createElement('div');
+            notification.className = 'fixed bottom-4 right-4 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg flex items-center animate-fade-in';
+            notification.innerHTML = `
+                <i class="fas fa-check-circle mr-2"></i>
+                <span>${message}</span>
+            `;
+            document.body.appendChild(notification);
+            setTimeout(() => notification.remove(), 3000);
+        }
+    </script>
+
+    <style>
+        @keyframes fade-in {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-in {
+            animation: fade-in 0.3s ease-out;
+        }
+    </style>
 </div>
 @endsection
