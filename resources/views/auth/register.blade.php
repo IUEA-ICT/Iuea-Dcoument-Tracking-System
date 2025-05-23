@@ -23,6 +23,7 @@
         }
     </script>
     <style>
+<<<<<<< HEAD
         :root {
             --primary: #800000;
             --secondary: #fdb913;
@@ -157,6 +158,12 @@
             </span>
         </button>
     </div>
+=======
+        body { font-family: 'Poppins', sans-serif; }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-gray-100 to-gray-200">
+>>>>>>> 3bb7f1c28387ed92257d37211ee6515a239a34d1
     <div class="min-h-screen flex flex-col justify-center py-4 sm:py-6 px-4 sm:px-6 lg:px-8">
         <div class="w-full max-w-[90%] sm:max-w-md mx-auto">
             <!-- IUEA Logo with background -->
@@ -166,8 +173,13 @@
                      alt="IUEA Logo">
             </div>
             
+<<<<<<< HEAD
             <h2 class="text-center text-2xl sm:text-3xl font-extrabold tracking-tight" style="color:#800000;">
                 Create a new account
+=======
+            <h2 class="text-center text-2xl sm:text-3xl font-extrabold text-gray-900 tracking-tight">
+                Create New Account
+>>>>>>> 3bb7f1c28387ed92257d37211ee6515a239a34d1
             </h2>
             <p class="mt-2 text-center text-xs sm:text-sm text-gray-600">
                 IUEA Document Tracking System
@@ -216,7 +228,11 @@
                     <div>
                         <button type="submit" 
                             class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-iuea-maroon hover:bg-opacity-90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-iuea-maroon transition-all duration-200">
+<<<<<<< HEAD
                             Register
+=======
+                            Create Account
+>>>>>>> 3bb7f1c28387ed92257d37211ee6515a239a34d1
                         </button>
                     </div>
                 </form>
@@ -225,6 +241,7 @@
                 <div class="mt-6 text-center text-sm">
                     <p class="text-gray-600">
                         Already have an account? 
+<<<<<<< HEAD
                         <a href="/login" class="font-medium text-iuea-maroon hover:text-opacity-80 underline">
                             Sign in
                         </a>
@@ -232,10 +249,17 @@
                     <p class="mt-4 text-center text-sm">
                         <a href="/register" class="font-medium" style="color:#800000;">Create new account</a>
                     </p>
+=======
+                        <a href="{{ route('login') }}" class="font-medium text-iuea-maroon hover:text-opacity-80 underline">
+                            Sign in
+                        </a>
+                    </p>
+>>>>>>> 3bb7f1c28387ed92257d37211ee6515a239a34d1
                 </div>
             </div>
         </div>
     </div>
+<<<<<<< HEAD
     <script>
     // Theme mode logic with modern SVG toggle and smooth transition
     (function() {
@@ -290,5 +314,7 @@
         loadTheme();
     })();
     </script>
+=======
+>>>>>>> 3bb7f1c28387ed92257d37211ee6515a239a34d1
 </body>
 </html>

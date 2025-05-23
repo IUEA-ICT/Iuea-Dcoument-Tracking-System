@@ -26,6 +26,7 @@
         }
     </script>
     <style>
+<<<<<<< HEAD
         :root {
             --primary: #800000;
             --secondary: #fdb913;
@@ -160,6 +161,12 @@
             </span>
         </button>
     </div>
+=======
+        body { font-family: 'Poppins', sans-serif; }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-gray-100 to-gray-200">
+>>>>>>> 3bb7f1c28387ed92257d37211ee6515a239a34d1
     <div class="min-h-screen flex flex-col justify-center py-4 sm:py-6 px-4 sm:px-6 lg:px-8">
         <div class="w-full max-w-[90%] sm:max-w-md mx-auto">
             <!-- IUEA Logo with background -->
@@ -171,7 +178,11 @@
                 </a>
             </div>
             
+<<<<<<< HEAD
             <h2 class="text-center text-2xl sm:text-3xl font-extrabold tracking-tight" style="color:#800000;">
+=======
+            <h2 class="text-center text-2xl sm:text-3xl font-extrabold text-gray-900 tracking-tight">
+>>>>>>> 3bb7f1c28387ed92257d37211ee6515a239a34d1
                 Document Tracking System
             </h2>
             <p class="mt-2 text-center text-xs sm:text-sm text-gray-600">
@@ -180,8 +191,13 @@
         </div>
 
         <div class="mt-6 sm:mt-8 w-full max-w-[90%] sm:max-w-md mx-auto">
+<<<<<<< HEAD
             <div class="login-card py-6 sm:py-8 px-4 sm:px-10 shadow-2xl rounded-lg border-t-4" style="border-top-color:var(--primary);">
                 <form class="space-y-4 sm:space-y-6" action="{{ route('login.post') }}" method="POST">
+=======
+            <div class="bg-white py-6 sm:py-8 px-4 sm:px-10 shadow-2xl rounded-lg border-t-4 border-iuea-maroon">
+                <form class="space-y-4 sm:space-y-6" action="{{ url('/login-submit') }}" method="POST">
+>>>>>>> 3bb7f1c28387ed92257d37211ee6515a239a34d1
                     @csrf
                     <!-- Email Input -->
                     <div>
@@ -219,7 +235,11 @@
                         </div>
 
                         <div class="text-sm">
+<<<<<<< HEAD
                             <a href="/forgot-password" class="font-medium text-iuea-maroon hover:text-opacity-80">
+=======
+                            <a href="{{ route('password.request') }}" class="font-medium text-iuea-maroon hover:text-opacity-80">
+>>>>>>> 3bb7f1c28387ed92257d37211ee6515a239a34d1
                                 Forgot password?
                             </a>
                         </div>
@@ -238,7 +258,11 @@
                 <div class="mt-4 sm:mt-6 text-center text-xs sm:text-sm">
                     <p class="text-gray-600">
                         Don't have an account? 
+<<<<<<< HEAD
                         <a href="/register" class="font-medium text-iuea-maroon hover:text-opacity-80 underline">
+=======
+                        <a href="{{ route('register') }}" class="font-medium text-iuea-maroon hover:text-opacity-80 underline">
+>>>>>>> 3bb7f1c28387ed92257d37211ee6515a239a34d1
                             Create Account
                         </a>
                     </p>
@@ -246,6 +270,7 @@
             </div>
         </div>
     </div>
+<<<<<<< HEAD
     <script>
     // Theme mode logic with modern SVG toggle and smooth transition
     (function() {
@@ -300,5 +325,7 @@
         loadTheme();
     })();
     </script>
+=======
+>>>>>>> 3bb7f1c28387ed92257d37211ee6515a239a34d1
 </body>
 </html>

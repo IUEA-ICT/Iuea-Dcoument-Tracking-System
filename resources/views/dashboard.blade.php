@@ -44,8 +44,12 @@
         <nav class="mt-8 px-4">
             <!-- Main Navigation -->
             <div class="space-y-4">
+<<<<<<< HEAD
                 <!-- Active link has bg-white/10 class -->
                 <a href="#" class="flex items-center px-4 py-3 text-sm rounded-lg bg-white/10 transition-colors">
+=======
+                <a href="/dashboard" class="flex items-center px-4 py-3 text-sm rounded-lg bg-white/10 transition-colors">
+>>>>>>> 3bb7f1c28387ed92257d37211ee6515a239a34d1
                     <i class="fas fa-home w-5 h-5"></i>
                     <span class="ml-3 font-medium">Dashboard</span>
                 </a>
@@ -54,12 +58,20 @@
                     <h3 class="text-xs uppercase tracking-wider text-white/50">Documents</h3>
                 </div>
 
+<<<<<<< HEAD
                 <a href="#" class="flex items-center px-4 py-3 text-sm rounded-lg hover:bg-white/5 transition-colors group">
+=======
+                <a href="/documents" class="flex items-center px-4 py-3 text-sm rounded-lg hover:bg-white/5 transition-colors group">
+>>>>>>> 3bb7f1c28387ed92257d37211ee6515a239a34d1
                     <i class="fas fa-file w-5 h-5 opacity-75 group-hover:opacity-100"></i>
                     <span class="ml-3">All Documents</span>
                 </a>
 
+<<<<<<< HEAD
                 <a href="#" class="flex items-center px-4 py-3 text-sm rounded-lg hover:bg-white/5 transition-colors group">
+=======
+                <a href="/documents/pending" class="flex items-center px-4 py-3 text-sm rounded-lg hover:bg-white/5 transition-colors group">
+>>>>>>> 3bb7f1c28387ed92257d37211ee6515a239a34d1
                     <i class="fas fa-clock w-5 h-5 opacity-75 group-hover:opacity-100"></i>
                     <span class="ml-3">Pending</span>
                     <span class="ml-auto bg-white/20 px-2 py-0.5 rounded-full text-xs">28</span>
@@ -69,12 +81,20 @@
                     <h3 class="text-xs uppercase tracking-wider text-white/50">Management</h3>
                 </div>
 
+<<<<<<< HEAD
                 <a href="#" class="flex items-center px-4 py-3 text-sm rounded-lg hover:bg-white/5 transition-colors group">
+=======
+                <a href="/users" class="flex items-center px-4 py-3 text-sm rounded-lg hover:bg-white/5 transition-colors group">
+>>>>>>> 3bb7f1c28387ed92257d37211ee6515a239a34d1
                     <i class="fas fa-users w-5 h-5 opacity-75 group-hover:opacity-100"></i>
                     <span class="ml-3">Users</span>
                 </a>
 
+<<<<<<< HEAD
                 <a href="#" class="flex items-center px-4 py-3 text-sm rounded-lg hover:bg-white/5 transition-colors group">
+=======
+                <a href="/reports" class="flex items-center px-4 py-3 text-sm rounded-lg hover:bg-white/5 transition-colors group">
+>>>>>>> 3bb7f1c28387ed92257d37211ee6515a239a34d1
                     <i class="fas fa-chart-bar w-5 h-5 opacity-75 group-hover:opacity-100"></i>
                     <span class="ml-3">Reports</span>
                 </a>
@@ -83,11 +103,19 @@
             <!-- Bottom Section -->
             <div class="absolute bottom-0 left-0 right-0 p-4">
                 <hr class="border-white/10 mb-4">
+<<<<<<< HEAD
                 <a href="/login" class="flex items-center px-4 py-3 text-sm rounded-lg hover:bg-white/5 transition-colors group text-red-300 hover:text-red-200">
                     <i class="fas fa-sign-out-alt w-5 h-5 opacity-75 group-hover:opacity-100"></i>
                     <span class="ml-3">Logout</span>
                 </a>
                 <a href="#" class="flex items-center px-4 py-3 text-sm rounded-lg hover:bg-white/5 transition-colors group">
+=======
+                <a href="{{ route('logout') }}" class="flex items-center px-4 py-3 text-sm rounded-lg hover:bg-white/5 transition-colors group text-red-300 hover:text-red-200">
+                    <i class="fas fa-sign-out-alt w-5 h-5 opacity-75 group-hover:opacity-100"></i>
+                    <span class="ml-3">Logout</span>
+                </a>
+                <a href="{{ route('settings') }}" class="flex items-center px-4 py-3 text-sm rounded-lg hover:bg-white/5 transition-colors group">
+>>>>>>> 3bb7f1c28387ed92257d37211ee6515a239a34d1
                     <i class="fas fa-cog w-5 h-5 opacity-75 group-hover:opacity-100"></i>
                     <span class="ml-3">Settings</span>
                 </a>
