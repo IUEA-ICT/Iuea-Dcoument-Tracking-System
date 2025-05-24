@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SettingsController;
+use App\Http\Controllers\ReportExportController;
 
 // Public Routes
 Route::get('/', function () {
@@ -55,6 +56,8 @@ Route::get('/users', function () {
 Route::get('/reports', function () {
     return view('reports.index');
 });
+
+Route::get('/reports/export/{type}', [ReportExportController::class, 'export'])->name('reports.export');
 
 // Settings Routes
 Route::get('/settings', function () {

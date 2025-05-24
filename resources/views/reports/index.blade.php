@@ -26,9 +26,56 @@
                 <option>Forms</option>
                 <option>Letters</option>
             </select>
-            <button class="bg-iuea-maroon text-white px-4 py-2 rounded-lg hover:bg-opacity-90">
-                <i class="fas fa-download mr-2"></i> Export Report
-            </button>
+            <div class="relative">
+                <button id="exportButton" class="bg-iuea-maroon text-white px-4 py-2 rounded-lg hover:bg-opacity-90 w-full flex items-center justify-center transition-all duration-300 hover:shadow-lg">
+                    <i class="fas fa-download mr-2"></i> Export Report
+                </button>
+                <div id="exportMenu" class="hidden absolute right-0 mt-3 w-72 rounded-xl shadow-2xl bg-white ring-1 ring-black ring-opacity-5 transform transition-all duration-300 z-50">
+                    <div class="p-3 space-y-2">
+                        <div class="px-3 py-2 text-sm font-semibold text-gray-600 border-b">
+                            Choose Export Format
+                        </div>
+                        <a href="{{ route('reports.export', 'pdf') }}" 
+                           onclick="showExportLoader(event, 'PDF')" 
+                           class="flex items-center space-x-3 p-3 hover:bg-gray-50 rounded-lg group transition-colors">
+                            <div class="flex-shrink-0 w-12 h-12 rounded-lg bg-red-50 flex items-center justify-center transition-transform group-hover:scale-110 duration-300">
+                                <i class="far fa-file-pdf text-2xl text-red-500"></i>
+                            </div>
+                            <div class="flex-1">
+                                <h4 class="text-sm font-medium text-gray-900">PDF Document</h4>
+                                <p class="text-xs text-gray-500">Best for printing and sharing</p>
+                            </div>
+                            <i class="fas fa-chevron-right text-gray-400 opacity-0 group-hover:opacity-100 transition-opacity"></i>
+                        </a>
+                        
+                        <a href="{{ route('reports.export', 'excel') }}"
+                           onclick="showExportLoader(event, 'Excel')"
+                           class="flex items-center space-x-3 p-3 hover:bg-gray-50 rounded-lg group transition-colors">
+                            <div class="flex-shrink-0 w-12 h-12 rounded-lg bg-green-50 flex items-center justify-center transition-transform group-hover:scale-110 duration-300">
+                                <i class="far fa-file-excel text-2xl text-green-500"></i>
+                            </div>
+                            <div class="flex-1">
+                                <h4 class="text-sm font-medium text-gray-900">Excel Spreadsheet</h4>
+                                <p class="text-xs text-gray-500">Editable data format</p>
+                            </div>
+                            <i class="fas fa-chevron-right text-gray-400 opacity-0 group-hover:opacity-100 transition-opacity"></i>
+                        </a>
+
+                        <a href="{{ route('reports.export', 'csv') }}"
+                           onclick="showExportLoader(event, 'CSV')"
+                           class="flex items-center space-x-3 p-3 hover:bg-gray-50 rounded-lg group transition-colors">
+                            <div class="flex-shrink-0 w-12 h-12 rounded-lg bg-blue-50 flex items-center justify-center transition-transform group-hover:scale-110 duration-300">
+                                <i class="far fa-file-csv text-2xl text-blue-500"></i>
+                            </div>
+                            <div class="flex-1">
+                                <h4 class="text-sm font-medium text-gray-900">CSV File</h4>
+                                <p class="text-xs text-gray-500">Universal compatibility</p>
+                            </div>
+                            <i class="fas fa-chevron-right text-gray-400 opacity-0 group-hover:opacity-100 transition-opacity"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -111,6 +158,67 @@
             maintainAspectRatio: true,
         }
     });
+
+    // Enhanced dropdown animation
+    const exportButton = document.getElementById('exportButton');
+    const exportMenu = document.getElementById('exportMenu');
+    
+    exportButton.addEventListener('click', () => {
+        exportMenu.classList.toggle('hidden');
+        // Add slide animation
+        if (!exportMenu.classList.contains('hidden')) {
+            exportMenu.classList.add('animate-fade-in-down');
+        }
+    });
+
+    // Close menu when clicking outside with fade out
+    document.addEventListener('click', (e) => {
+        if (!exportButton.contains(e.target) && !exportMenu.contains(e.target)) {
+            exportMenu.classList.add('hidden');
+            exportMenu.classList.remove('animate-fade-in-down');
+        }
+    });
+
+    function showExportLoader(event, type) {
+        event.preventDefault();
+        const url = event.currentTarget.href;
+        
+        // Create loading overlay
+        const overlay = document.createElement('div');
+        overlay.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50';
+        overlay.innerHTML = `
+            <div class="bg-white p-6 rounded-lg shadow-xl flex items-center space-x-4">
+                <div class="animate-spin rounded-full h-8 w-8 border-4 border-iuea-maroon border-t-transparent"></div>
+                <p class="text-lg">Preparing ${type} export...</p>
+            </div>
+        `;
+        document.body.appendChild(overlay);
+
+        // Perform the export
+        setTimeout(() => {
+            window.location.href = url;
+            setTimeout(() => {
+                overlay.remove();
+            }, 1000);
+        }, 1000);
+    }
 </script>
+
+<style>
+    @keyframes fadeInDown {
+        from {
+            opacity: 0;
+            transform: translateY(-10px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    
+    .animate-fade-in-down {
+        animation: fadeInDown 0.3s ease-out;
+    }
+</style>
 @endsection
 @endsection
