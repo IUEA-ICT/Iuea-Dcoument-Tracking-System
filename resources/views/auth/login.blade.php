@@ -51,8 +51,19 @@
 
         <div class="mt-6 sm:mt-8 w-full max-w-[90%] sm:max-w-md mx-auto">
             <div class="bg-white py-6 sm:py-8 px-4 sm:px-10 shadow-2xl rounded-lg border-t-4 border-iuea-maroon">
-                <form class="space-y-4 sm:space-y-6" action="{{ url('/login-submit') }}" method="POST">
-                    @csrf
+                <form class="space-y-4 sm:space-y-6" onsubmit="loginWithFirebase(event)">
+                    <!-- Error Message Area -->
+                    <div id="error-message" class="hidden rounded-md bg-red-50 p-4">
+                        <div class="flex">
+                            <div class="flex-shrink-0">
+                                <i class="fas fa-exclamation-circle text-red-400"></i>
+                            </div>
+                            <div class="ml-3">
+                                <p class="text-sm text-red-700" id="error-text"></p>
+                            </div>
+                        </div>
+                    </div>
+
                     <!-- Email Input -->
                     <div>
                         <label for="email" class="block text-sm font-medium text-gray-700">
@@ -116,5 +127,94 @@
             </div>
         </div>
     </div>
+
+    <!-- Firebase Auth Script -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
+        import { getAuth, signInWithEmailAndPassword, setPersistence, browserSessionPersistence, browserLocalPersistence } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-auth.js";
+
+        // Initialize Firebase
+        const firebaseConfig = {
+            apiKey: "AIzaSyBydrQlgL1-AI9pBFiR8w6Waz1D0tdvq8g",
+            authDomain: "iuea-dcoument-tracker.firebaseapp.com",
+            projectId: "iuea-dcoument-tracker",
+            storageBucket: "iuea-dcoument-tracker.firebasestorage.app",
+            messagingSenderId: "343956353748",
+            appId: "1:343956353748:web:12bf8d958f316fa86ec141",
+            measurementId: "G-JK5R5BQZ8G"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+
+        window.loginWithFirebase = async function (event) {
+            event.preventDefault();
+
+            const email = document.getElementById("email").value;
+            const password = document.getElementById("password").value;
+            const rememberMe = document.getElementById("remember-me").checked;
+            const errorDiv = document.getElementById("error-message");
+            const errorText = document.getElementById("error-text");
+            const submitButton = event.target.querySelector('button[type="submit"]');
+
+            // Reset error message
+            errorDiv.classList.add('hidden');
+            
+            // Add loading state
+            submitButton.disabled = true;
+            submitButton.innerHTML = `
+                <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                </svg>
+                Signing in...
+            `;
+
+            try {
+                // Set persistence based on remember me checkbox
+                await setPersistence(auth, rememberMe ? browserLocalPersistence : browserSessionPersistence);
+                
+                // Sign in
+                const userCredential = await signInWithEmailAndPassword(auth, email, password);
+                
+                // Save user data if remember me is checked
+                if (rememberMe) {
+                    localStorage.setItem('user_email', email);
+                } else {
+                    localStorage.removeItem('user_email');
+                }
+                
+                window.location.href = "/dashboard";
+            } catch (error) {
+                errorDiv.classList.remove('hidden');
+                
+                switch (error.code) {
+                    case 'auth/invalid-credential':
+                        errorText.textContent = 'Invalid email or password';
+                        break;
+                    case 'auth/user-not-found':
+                        errorText.textContent = 'No account found with this email';
+                        break;
+                    case 'auth/too-many-requests':
+                        errorText.textContent = 'Too many attempts. Please try again later';
+                        break;
+                    default:
+                        errorText.textContent = 'An error occurred. Please try again';
+                }
+
+                submitButton.disabled = false;
+                submitButton.innerHTML = 'Sign in to your account';
+            }
+        };
+
+        // Check for remembered email on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            const rememberedEmail = localStorage.getItem('user_email');
+            if (rememberedEmail) {
+                document.getElementById('email').value = rememberedEmail;
+                document.getElementById('remember-me').checked = true;
+            }
+        });
+    </script>
 </body>
 </html>

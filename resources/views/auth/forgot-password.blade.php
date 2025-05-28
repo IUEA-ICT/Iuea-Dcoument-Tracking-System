@@ -29,51 +29,138 @@
 <body class="bg-gradient-to-br from-gray-100 to-gray-200">
     <div class="min-h-screen flex flex-col justify-center py-4 sm:py-6 px-4 sm:px-6 lg:px-8">
         <div class="w-full max-w-[90%] sm:max-w-md mx-auto">
-            <!-- IUEA Logo with background -->
+            <!-- Logo -->
             <div class="bg-white p-3 sm:p-4 rounded-full shadow-lg w-24 h-24 sm:w-32 sm:h-32 mx-auto mb-4 sm:mb-6">
                 <img class="w-full h-full object-contain" 
                      src="//172.16.17.10/port/img/Logosq.png" 
                      alt="IUEA Logo">
             </div>
-            
-            <h2 class="text-center text-2xl sm:text-3xl font-extrabold text-gray-900">
-                Reset Password
-            </h2>
-            <p class="mt-2 text-center text-xs sm:text-sm text-gray-600">
-                Enter your email address and we'll send you a link to reset your password
-            </p>
         </div>
 
         <div class="mt-6 sm:mt-8 w-full max-w-[90%] sm:max-w-md mx-auto">
             <div class="bg-white py-6 sm:py-8 px-4 sm:px-10 shadow-2xl rounded-lg border-t-4 border-iuea-maroon">
-                <form class="space-y-6" action="#" method="POST">
-                    <div>
-                        <label for="email" class="block text-sm font-medium text-gray-700">
-                            Email
-                        </label>
-                        <div class="mt-1">
-                            <input id="email" name="email" type="email" required
-                                placeholder="username@iuea.ac.ug"
-                                class="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400
-                                focus:outline-none focus:ring-2 focus:ring-iuea-maroon focus:border-iuea-maroon">
+                <div class="text-center mb-6">
+                    <h2 class="text-xl font-semibold text-gray-900">Reset Password</h2>
+                    <p class="mt-2 text-sm text-gray-600">
+                        Enter your email address and we'll send you a link to reset your password
+                    </p>
+                </div>
+
+                <form class="space-y-6" onsubmit="resetPassword(event)">
+                    <!-- Success Message Area -->
+                    <div id="success-message" class="hidden rounded-md bg-green-50 p-4">
+                        <div class="flex">
+                            <div class="flex-shrink-0">
+                                <i class="fas fa-check-circle text-green-400"></i>
+                            </div>
+                            <div class="ml-3">
+                                <p class="text-sm text-green-700">Reset link sent! Check your email.</p>
+                            </div>
                         </div>
                     </div>
 
+                    <!-- Error Message Area -->
+                    <div id="error-message" class="hidden rounded-md bg-red-50 p-4">
+                        <div class="flex">
+                            <div class="flex-shrink-0">
+                                <i class="fas fa-exclamation-circle text-red-400"></i>
+                            </div>
+                            <div class="ml-3">
+                                <p id="error-text" class="text-sm text-red-700"></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Email Input -->
+                    <div>
+                        <label for="email" class="block text-sm font-medium text-gray-700">Email address</label>
+                        <input id="email" name="email" type="email" required
+                            class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-iuea-maroon focus:border-iuea-maroon">
+                    </div>
+
+                    <!-- Submit Button -->
                     <div>
                         <button type="submit"
-                            class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-iuea-maroon hover:bg-opacity-90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-iuea-maroon transition-all duration-200">
+                            class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-iuea-maroon hover:bg-opacity-90 focus:ring-2 focus:ring-offset-2 focus:ring-iuea-maroon transition-all duration-200">
                             Send Reset Link
                         </button>
                     </div>
                 </form>
 
+                <!-- Back to Login -->
                 <div class="mt-6 text-center text-sm">
                     <a href="{{ route('login') }}" class="font-medium text-iuea-maroon hover:text-opacity-80">
-                        Back to login
+                        <i class="fas fa-arrow-left mr-2"></i>Back to login
                     </a>
                 </div>
             </div>
         </div>
     </div>
+
+    <!-- Firebase Auth Script -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
+        import { getAuth, sendPasswordResetEmail } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-auth.js";
+
+        // Initialize Firebase
+        const firebaseConfig = {
+            apiKey: "AIzaSyBydrQlgL1-AI9pBFiR8w6Waz1D0tdvq8g",
+            authDomain: "iuea-dcoument-tracker.firebaseapp.com",
+            projectId: "iuea-dcoument-tracker",
+            storageBucket: "iuea-dcoument-tracker.firebasestorage.app",
+            messagingSenderId: "343956353748",
+            appId: "1:343956353748:web:12bf8d958f316fa86ec141",
+            measurementId: "G-JK5R5BQZ8G"
+        };
+        
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+
+        window.resetPassword = function(event) {
+            event.preventDefault();
+
+            const email = document.getElementById('email').value;
+            const errorDiv = document.getElementById('error-message');
+            const errorText = document.getElementById('error-text');
+            const successDiv = document.getElementById('success-message');
+            const submitButton = event.target.querySelector('button[type="submit"]');
+
+            // Reset messages
+            errorDiv.classList.add('hidden');
+            successDiv.classList.add('hidden');
+
+            // Add loading state
+            submitButton.disabled = true;
+            submitButton.innerHTML = `
+                <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                </svg>
+                Sending...
+            `;
+
+            sendPasswordResetEmail(auth, email)
+                .then(() => {
+                    successDiv.classList.remove('hidden');
+                    submitButton.innerHTML = 'Reset Link Sent';
+                })
+                .catch((error) => {
+                    errorDiv.classList.remove('hidden');
+                    switch (error.code) {
+                        case 'auth/user-not-found':
+                            errorText.textContent = 'No account found with this email';
+                            break;
+                        case 'auth/invalid-email':
+                            errorText.textContent = 'Please enter a valid email address';
+                            break;
+                        default:
+                            errorText.textContent = 'An error occurred. Please try again';
+                    }
+                    submitButton.disabled = false;
+                    submitButton.innerHTML = 'Send Reset Link';
+                });
+        };
+    </script>
 </body>
 </html>
