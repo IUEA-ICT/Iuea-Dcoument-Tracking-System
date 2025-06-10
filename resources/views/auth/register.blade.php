@@ -145,111 +145,119 @@
 
     <!-- Firebase Auth Script -->
     <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
-        import { getAuth, createUserWithEmailAndPassword, updateProfile } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-auth.js";
+    import { initializeApp, setLogLevel } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
+    import { getAuth, createUserWithEmailAndPassword, updateProfile, signOut} from "https://www.gstatic.com/firebasejs/10.11.0/firebase-auth.js";
+    import { getFirestore,doc,setDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore.js";
 
-        // Initialize Firebase
-        const firebaseConfig = {
-            apiKey: "AIzaSyBydrQlgL1-AI9pBFiR8w6Waz1D0tdvq8g",
-            authDomain: "iuea-dcoument-tracker.firebaseapp.com",
-            projectId: "iuea-dcoument-tracker",
-            storageBucket: "iuea-dcoument-tracker.firebasestorage.app",
-            messagingSenderId: "343956353748",
-            appId: "1:343956353748:web:12bf8d958f316fa86ec141",
-            measurementId: "G-JK5R5BQZ8G"
-        };
+    // Activer les logs de debug Firebase
+    setLogLevel("debug");
 
-        const app = initializeApp(firebaseConfig);
-        const auth = getAuth(app);
+    // Configuration Firebase
+    const firebaseConfig = {
+        apiKey: "AIzaSyBydrQlgL1-AI9pBFiR8w6Waz1D0tdvq8g",
+        authDomain: "iuea-dcoument-tracker.firebaseapp.com",
+        projectId: "iuea-dcoument-tracker",
+        storageBucket: "iuea-dcoument-tracker.firebasestorage.app",
+        messagingSenderId: "343956353748",
+        appId: "1:343956353748:web:12bf8d958f316fa86ec141",
+        measurementId: "G-JK5R5BQZ8G"
+    };
 
-        window.registerWithFirebase = function(event) {
-            event.preventDefault();
-            const form = event.target;
-            const name = document.getElementById('name').value;
-            const email = document.getElementById('email').value;
-            const password = document.getElementById('password').value;
-            const passwordConfirmation = document.getElementById('password_confirmation').value;
-            const errorDiv = document.getElementById('error-message');
-            const errorText = document.getElementById('error-text');
-            const successDiv = document.getElementById('success-message');
-            const submitButton = event.target.querySelector('button[type="submit"]');
+    // Initialiser Firebase
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
 
-            // Reset messages and button
-            errorDiv.classList.add('hidden');
-            successDiv.classList.add('hidden');
-            submitButton.disabled = true;
-            submitButton.innerHTML = 'Creating Account...';
+    // Fonction d'inscription
+    window.registerWithFirebase = async function(event) {
+        event.preventDefault();
 
-            // Basic validation
-            if (password !== passwordConfirmation) {
-                errorDiv.classList.remove('hidden');
-                errorText.textContent = 'Passwords do not match';
-                submitButton.disabled = false;
-                submitButton.innerHTML = 'Create Account';
-                return;
-            }
+        const form = event.target;
+        const name = document.getElementById('name').value;
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
+        const confirm = document.getElementById('password_confirmation').value;
+        const errorDiv = document.getElementById('error-message');
+        const errorText = document.getElementById('error-text');
+        const successDiv = document.getElementById('success-message');
+        const submitButton = form.querySelector('button[type="submit"]');
 
-            if (password.length < 6) {
-                errorDiv.classList.remove('hidden');
-                errorText.textContent = 'Password must be at least 6 characters';
-                submitButton.disabled = false;
-                submitButton.innerHTML = 'Create Account';
-                return;
-            }
+        errorDiv.classList.add('hidden');
+        successDiv.classList.add('hidden');
+        submitButton.disabled = true;
+        submitButton.innerHTML = 'Creating Account...';
 
-            // Create user
-            createUserWithEmailAndPassword(auth, email, password)
-                .then((userCredential) => {
-                    // Update profile
-                    return updateProfile(userCredential.user, {
-                        displayName: name
-                    });
-                })
-                .then(() => {
-                    // Show success message
-                    successDiv.classList.remove('hidden');
-                    submitButton.innerHTML = 'Account Created Successfully!';
-                    submitButton.disabled = true;
+        if (password !== confirm) {
+            showError('Passwords do not match');
+            return;
+        }
 
-                    // Clear all form inputs
-                    form.reset();
+        if (password.length < 6) {
+            showError('Password must be at least 6 characters');
+            return;
+        }
 
-                    // Sign out the user
-                    auth.signOut();
+        try {
+            // Création de l'utilisateur
+            const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+            const user = userCredential.user;
 
-                    // Hide success message and reset button after 3 seconds
-                    setTimeout(() => {
-                        successDiv.classList.add('hidden');
-                        submitButton.innerHTML = 'Create Account';
-                        submitButton.disabled = false;
-                    }, 3000);
-                })
-                .catch((error) => {
-                    errorDiv.classList.remove('hidden');
+            // Mise à jour du nom
+            await updateProfile(user, { displayName: name });
 
-                    // Handle specific errors
-                    switch (error.code) {
-                        case 'auth/email-already-in-use':
-                            errorText.textContent = 'This email is already registered';
-                            break;
-                        case 'auth/invalid-email':
-                            errorText.textContent = 'Please enter a valid email address';
-                            break;
-                        case 'auth/operation-not-allowed':
-                            errorText.textContent = 'Email/password registration is not enabled';
-                            break;
-                        case 'auth/weak-password':
-                            errorText.textContent = 'Password is too weak';
-                            break;
-                        default:
-                            errorText.textContent = 'Registration failed. Please try again';
-                    }
-
-                    // Reset button
-                    submitButton.disabled = false;
-                    submitButton.innerHTML = 'Create Account';
+            // Enregistrement dans Firestore
+            try {
+                await setDoc(doc(db, "users", user.uid), {
+                    uid: user.uid,
+                    name: name,
+                    email: email,
+                    createdAt: serverTimestamp()
                 });
-        };
+                console.log("🔥 Firestore write successful");
+            } catch (e) {
+                console.error("❌ Firestore write failed: ", e);
+                showError('Erreur lors de l’enregistrement Firestore');
+                return;
+            }
+
+            // Succès
+            successDiv.classList.remove('hidden');
+            submitButton.innerHTML = 'Account Created Successfully!';
+            form.reset();
+            await signOut(auth);
+
+            setTimeout(() => {
+                successDiv.classList.add('hidden');
+                submitButton.innerHTML = 'Create Account';
+                submitButton.disabled = false;
+            }, 3000);
+        } catch (error) {
+            console.error("❌ Firebase Auth error:", error);
+            switch (error.code) {
+                case 'auth/email-already-in-use':
+                    showError('This email is already registered');
+                    break;
+                case 'auth/invalid-email':
+                    showError('Please enter a valid email address');
+                    break;
+                case 'auth/operation-not-allowed':
+                    showError('Email/password registration is not enabled');
+                    break;
+                case 'auth/weak-password':
+                    showError('Password is too weak');
+                    break;
+                default:
+                    showError('Registration failed. Please try again');
+            }
+        }
+
+        function showError(message) {
+            errorDiv.classList.remove('hidden');
+            errorText.textContent = message;
+            submitButton.disabled = false;
+            submitButton.innerHTML = 'Create Account';
+        }
+    };
     </script>
 
     <script id="theme-switcher-script">

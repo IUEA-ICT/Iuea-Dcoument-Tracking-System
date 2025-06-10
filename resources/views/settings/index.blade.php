@@ -182,7 +182,7 @@
                                     </div>
                                 </div>
                                 <div>
-                                    <h3 class="text-lg font-medium text-gray-800">John Doe</h3>
+                                    <h3 id="user-name" class="text-lg font-medium text-gray-800"></h3> 
                                     <p class="text-sm text-gray-500">Administrator</p>
                                 </div>
                             </div>
@@ -426,6 +426,48 @@
             <span>Changes saved successfully!</span>
         </div>
     </div>
+
+    <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
+    import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-auth.js";
+    import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore.js";
+
+    // Ton config Firebase
+    const firebaseConfig = {
+        apiKey: "AIzaSyBydrQlgL1-AI9pBFiR8w6Waz1D0tdvq8g",
+        authDomain: "iuea-dcoument-tracker.firebaseapp.com",
+        projectId: "iuea-dcoument-tracker",
+        appId: "1:343956353748:web:12bf8d958f316fa86ec141"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
+
+    const userNameEl = document.getElementById("user-name");
+
+    onAuthStateChanged(auth, async (user) => {
+        if (user) {
+            // OPTION 1: Utiliser displayName s’il est défini
+            if (user.displayName) {
+                userNameEl.textContent = user.displayName;
+            } else {
+                // OPTION 2: Chercher dans Firestore
+                const userDoc = await getDoc(doc(db, "users", user.uid));
+                if (userDoc.exists()) {
+                    const data = userDoc.data();
+                    userNameEl.textContent = data.name || "Unnamed";
+                } else {
+                    userNameEl.textContent = "Unknown User";
+                }
+            }
+        } else {
+            // L'utilisateur n'est pas connecté
+            window.location.href = "/login";
+        }
+    });
+    </script>
+
     <!-- Theme Dropdown JS Fix -->
     <script>
         document.addEventListener('DOMContentLoaded', function () {
