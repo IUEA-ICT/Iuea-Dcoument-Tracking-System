@@ -1,3 +1,9 @@
+@extends('layouts.app')
+
+@section('title', 'Settings')
+@section('header', 'Settings')
+
+@section('content')
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="">
 <head>
@@ -182,7 +188,7 @@
                                     </div>
                                 </div>
                                 <div>
-                                    <h3 id="user-name" class="text-lg font-medium text-gray-800"></h3> 
+                                    <h3 id="user-name" class="font-medium text-gray-800 dark:text-white"></h3> 
                                     <p class="text-sm text-gray-500">Administrator</p>
                                 </div>
                             </div>
@@ -546,5 +552,4 @@
         });
     </script>
 <!-- Just ensured consistent class styles with the updated card-bg, sidebar-bg, and dark mode logic -->
-</body>
-</html>
+@endsection

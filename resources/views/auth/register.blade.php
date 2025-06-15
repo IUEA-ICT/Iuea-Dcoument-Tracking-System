@@ -211,6 +211,7 @@
                     uid: user.uid,
                     name: name,
                     email: email,
+                    role: "user",
                     createdAt: serverTimestamp()
                 });
                 console.log("🔥 Firestore write successful");

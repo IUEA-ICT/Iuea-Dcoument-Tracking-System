@@ -52,6 +52,10 @@
             <!-- Bottom Section -->
             <div class="absolute bottom-0 left-0 right-0 p-4">
                 <hr class="border-white/10 mb-4">
+                <a href="{{ route('settings') }}" class="flex items-center px-4 py-3 text-sm rounded-lg transition-colors hover:bg-white/5 dark:hover:bg-[#2e3a4e] {{ request()->is('settings') ? 'sidebar-active' : '' }}">
+                    <i class="fas fa-cog w-5 h-5"></i>
+                    <span class="ml-3">Settings</span>
+                </a>
                 <a href="/login" class="flex items-center px-4 py-3 text-sm rounded-lg transition-colors text-red-300 hover:text-red-200 hover:bg-white/5 dark:hover:bg-[#2e3a4e]">
                     <i class="fas fa-sign-out-alt w-5 h-5"></i>
                     <span class="ml-3">Logout</span>
