@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\ReportExportController;
+use App\Http\Controllers\ActivityController;
 
 // Public Routes
 Route::get('/', function () {
@@ -35,8 +36,8 @@ Route::post('/login-submit', function () {
 
 // Dashboard
 Route::get('/dashboard', function () {
-    return view('dashboard');
-});
+    return view('dashboard.dashboard');
+})->name('dashboard');
 
 // Documents
 Route::get('/documents', function () {
@@ -67,5 +68,13 @@ Route::get('/settings', function () {
 Route::post('/settings/profile', [SettingsController::class, 'updateProfile'])->name('settings.profile.update');
 Route::post('/settings/password', [SettingsController::class, 'updatePassword'])->name('settings.password.update');
 Route::post('/settings/notifications', [SettingsController::class, 'updateNotifications'])->name('settings.notifications.update');
+
+// Activity
+Route::get('/activity', [ActivityController::class, 'index'])->name('activity');
+
+// Role Management Route
+Route::get('/roles/manage', function () {
+    return view('roles.manage');
+})->name('roles.manage');
 
 

@@ -43,9 +43,19 @@
                     <span class="ml-3">Users</span>
                 </a>
 
+                <a href="/roles/manage" class="flex items-center px-4 py-3 text-sm rounded-lg transition-colors hover:bg-white/5 dark:hover:bg-[#2e3a4e] {{ request()->is('roles/manage') ? 'sidebar-active' : '' }}">
+                    <i class="fas fa-user-shield w-5 h-5"></i>
+                    <span class="ml-3">Manage Roles</span>
+                </a>
+
                 <a href="/reports" class="flex items-center px-4 py-3 text-sm rounded-lg transition-colors hover:bg-white/5 dark:hover:bg-[#2e3a4e] {{ request()->is('reports') ? 'sidebar-active' : '' }}">
                     <i class="fas fa-chart-bar w-5 h-5"></i>
                     <span class="ml-3">Reports</span>
+                </a>
+
+                <a href="{{ route('activity') }}" class="flex items-center px-4 py-3 text-sm rounded-lg transition-colors hover:bg-white/5 dark:hover:bg-[#2e3a4e] {{ request()->is('activity') ? 'sidebar-active' : '' }}">
+                    <i class="fas fa-history w-5 h-5"></i>
+                    <span class="ml-3">Activity Log</span>
                 </a>
             </div>
 
